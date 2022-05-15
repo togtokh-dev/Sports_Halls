@@ -72,6 +72,12 @@
                <button type="submit" name="login" id="submitBtn" class="btn btn-success">
                  Нэвтрэх
                </button>
+               <?php if(!isset($_SESSION['access_token'])){ ?>
+                <button type="button" class="btn btn-outline-primary mt-4 mb-4 btn-block fb_login">
+                <i class="ri-facebook-circle-line"></i>
+                  Facebook ээр үргэлжилүүлэх
+                </button>
+               <?php } ?>
              </form>
            </div>
            <div class="col-xl-3"></div>
@@ -80,6 +86,24 @@
      </body>
      <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
      <script type="text/javascript">
+     $('.fb_login').click(function() {
+      var new_window = window.open('<?php echo @$facebook_login_url; ?>', 'facebook-popup', 'height=350,width=600')
+      var timer = setInterval(function() {
+            if(new_window.closed) {
+              location.href="./api/social_login.php";
+                clearInterval(timer);
+            }
+        }, 1000);
+      });
+    $('.fb_logout').click(function() {
+      var new_window = window.open('logout.php', 'facebook-popup', 'height=350,width=600')
+      var timer = setInterval(function() {
+          if(new_window.closed) {
+            location.reload()
+              clearInterval(timer);
+          }
+      }, 1000);
+    });
        $("#submitBtn").prop("disabled", true);
        $("#change_type").click(function() {
          if($("#password").attr('type')=="password"){
