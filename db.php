@@ -8,6 +8,7 @@
 		'default_graph_version'  => 'v8.0'
 	]);
   $db = mysqli_connect("localhost", "root", "1234", "zaal");
+  $db->set_charset("utf8");
   $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
   date_default_timezone_set("Asia/Ulaanbaatar");
   $time=(new DateTime())->format("Y-m-d G:i:s");

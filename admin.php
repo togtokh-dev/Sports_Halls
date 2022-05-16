@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <?php
 	include('server.php');
-	// if (!isLoggedIn()) {
-	// 	header('location: login.php');
-	// }
+	if (!isAdmin()) {
+		header('location: login.php');
+	}
  ?>
 <html lang="en" dir="ltr">
   <head>
@@ -53,10 +53,13 @@
   </div>
   <div class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container">
-      <a href="#" class="navbar-brand d-flex align-items-center">
+      <a href="./index.php" class="navbar-brand d-flex align-items-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-        <strong>Заал</strong>
+        <strong>Нүүр</strong>
       </a>
+			<a href="#" class="navbar-brand d-flex align-items-center">
+					<strong>Admin</strong>
+			</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -64,48 +67,69 @@
   </div>
 	</header>
 	<main>
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <!-- <h1 class="fw-light"></h1>
-        <p class="lead text-muted"></p> -->
-				<div class="row g-3">
-				  <div class="col">
-						<select class="form-select" id="city">
-					   <option value="null" selected>--Хотоо сонгоно уу--</option>
-						 <?php
-							 $response = mysqli_query($db, "SELECT * FROM city order by city_name");
-							 while ($row = mysqli_fetch_array($response)) {
-						 ?>
-										 <option value="<?php echo $row['city_code']; ?>"><?php echo $row['city_name']; ?></option>
-						 <?php }	?>
-					 </select>
-				  </div>
-				  <div class="col">
-						<select class="form-select" id="district" >
-						  <option value="null" selected>--Дүүрэг--</option>
-						</select>
-				  </div>
-					<div class="col">
-						<select class="form-select" id="khoroo" >
-						  <option value="null" selected>--Баг/хороо--</option>
-						</select>
-				  </div>
-				</div>
-				<div class="row g-3">
-					<div class="pt-2">
-					  <input type="text" class="form-control" id="search_text" placeholder="Хайх...">
+  <section class="py-5  container">
+		<form class="row g-3" action="api/insert.php"  method="post"  enctype="multipart/form-data">
+			<div class="col-12">
+		    <label for="inputAddress" class="form-label">Заалны нэр</label>
+		    <input type="text" class="form-control" name="zaal_name"  placeholder="Заалны нэр" id="zaal_name_in">
+		  </div>
+		  <div class="col-4">
+		    <label for="inputEmail4" class="form-label">Хотоо сонгоно уу</label>
+				<select class="form-select" id="city" name="zaal_city">
+				 <option value="null" selected>--Хотоо сонгоно уу--</option>
+				 <?php
+					 $response = mysqli_query($db, "SELECT * FROM city order by city_name");
+					 while ($row = mysqli_fetch_array($response)) {
+				 ?>
+								 <option value="<?php echo $row['city_code']; ?>"><?php echo $row['city_name']; ?></option>
+				 <?php }	?>
+			 </select>
+		  </div>
+		  <div class="col-4">
+		    <label for="inputPassword4" class="form-label">Дүүрэг</label>
+				<select class="form-select" id="district" name="zaal_district">
+					<option value="null" selected>--Дүүрэг--</option>
+				</select>
+		  </div>
+			<div class="col-4">
+		    <label for="inputPassword4" class="form-label">Баг/хороо</label>
+				<select class="form-select" id="khoroo"  name="zaal_khoroo">
+					<option value="null" selected>--Баг/хороо--</option>
+				</select>
+		  </div>
+		  <div class="col-6">
+		    <label for="inputCity" class="form-label">Зураг</label>
+		    <input type="file" class="form-control" name="zaal_image" id="imageFile_img">
+		  </div>
+		  <div class="col-6">
+		    <label for="inputZip" class="form-label">Youtube video id</label>
+		    <input type="text" class="form-control" name="zaal_video" id="imageFile" >
+		  </div>
+		  <div class="col-12">
+		    <button type="submit" class="btn btn-primary ">Оруулах</button>
+		  </div>
+		</form>
+		<div class="row ">
+			<div class="col-3">
+
+			</div>
+			<div class="col-6">
+				<div class="card shadow-sm">
+					<img src="" alt="" class="bd-placeholder-img card-img-top" width="100%" height="225" id="preview_img">
+					<div class="card-body">
+						<div class="text-center">
+							<p class="card-text" id="zaal_name"></p>
+								<iframe width="420" height="315" class=" mt-4 mb-4 " src="https://www.youtube.com/embed/" id="preview"></iframe>
+						</div>
 					</div>
 				</div>
-      </div>
-    </div>
-  </section>
-  <div class="album py-5 bg-light">
-    <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="zaals">
-     </div>
-    </div>
-  </div>
+			</div>
+			<div class="col-3">
+
+			</div>
+		</div>
+
+	  </section>
 	</main>
 	</body>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -188,6 +212,9 @@
 				});
 			}
 	});
+	$('#zaal_name_in').keyup(function(){
+			$('#zaal_name').text($(this).val());
+	});
 	function zaal_filter(){
 		var city=$("#city").val();
 		var district=$("#district").val();
@@ -206,5 +233,19 @@
 			}
 		});
 	}
+	$( '#imageFile' ).keyup(function() {
+			$('#preview').attr('src','https://www.youtube.com/embed/'+$(this).val());
+	});
+	$('#imageFile_img').change(function(evt) {
+			var files = evt.target.files;
+			var file = files[0];
+			if (file) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$('#preview_img').attr('src',e.target.result)
+					};
+					reader.readAsDataURL(file);
+			}
+	});
 	</script>
 </html>

@@ -31,4 +31,13 @@
   function rand_text($length) {
 			return substr(str_shuffle(str_repeat($x='0123456789QWERTYUIOPLKJHGFDSAZXCVBNM', ceil($length/strlen($x)) )),1,$length);
 	}
+  function zaal_location($id) {
+    global $db;
+    $query = "SELECT khoroo.khoroo_name,city.city_name,district.district_name FROM khoroo
+              JOIN city ON khoroo.khoroo_grand_parent = city.city_code
+              JOIN district ON khoroo.khoroo_parent = district.district_code and city.city_code = district.district_parent
+              where khoroo.khoroo_id='$id'";
+    $results = mysqli_query($db, $query);
+    return mysqli_fetch_assoc($results);
+	}
 ?>
