@@ -8,13 +8,12 @@
   if(count($_POST)==0){
     $_POST = $input;
   }
-  print_r($_POST);
   if (isset($_POST['zaal_name'])) {
     $rand_id= user_id_rand(10);
 		if($_FILES["zaal_image"]['tmp_name']){
 			$target_dir = "../uploads/";
-			$target_file = "uploads/" . basename($_FILES["zaal_image"]["name"]);
-			$zaal_image=$host_url.'/'.$target_file;
+			$target_file = $target_dir . basename($_FILES["zaal_image"]["name"]);
+			$zaal_image=$host_url."/uploads/" . basename($_FILES["zaal_image"]["name"]);
 			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 			$check = getimagesize($_FILES["zaal_image"]["tmp_name"]);
 			move_uploaded_file($_FILES["zaal_image"]["tmp_name"], $target_file);

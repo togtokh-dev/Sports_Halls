@@ -67,112 +67,68 @@
   </div>
 	</header>
 	<main>
-    <section class="py-5  container">
-		<ul class="nav nav-pills mb-3 nav-fill" id="pills-tab" role="tablist">
-	  <li class="nav-item" role="presentation">
-	    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Заалууд</button>
-	  </li>
-	  <li class="nav-item" role="presentation">
-	    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Заал нэмэх</button>
-	  </li>
-	  <li class="nav-item" role="presentation">
-	    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Захиалга ууд</button>
-	  </li>
-	</ul>
-	<div class="tab-content" id="pills-tabContent">
-	  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-			<table class="table table-bordered border-primar">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Нэр</th>
-      <th scope="col">Хаяг</th>
-      <th scope="col">Үйлдэл</th>
-    </tr>
-  </thead>
-  <tbody>
-		<?php
-			$response = mysqli_query($db, "SELECT * FROM  zaal ");
-			while ($row = mysqli_fetch_array($response)) {
-		?>
-		<tr>
-      <th scope="row"><?php echo $row['zaal_id']; ?></th>
-      <td><?php echo $row['zaal_name']; ?></td>
-      <td><?php echo (zaal_location($row['zaal_khoroo'])['city_name']); ?> / <?php echo (zaal_location($row['zaal_khoroo'])['district_name']); ?> / <?php echo (zaal_location($row['zaal_khoroo'])['khoroo_name']); ?></td>
-      <td class="text-center">
-				<a href="#"><img src="https://img.icons8.com/nolan/64/edit--v1.png" width="30"/></a>
-				<a href="#"><img src="https://img.icons8.com/dusk/64/000000/filled-trash.png" width="30"/></a>
-			</td>
-    </tr>
-		<?php }	?>
-  </tbody>
-</table>
-		</div>
-	  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
-			<form class="row g-3" action="api/insert.php"  method="post"  enctype="multipart/form-data">
-				<div class="col-12">
-			    <label for="inputAddress" class="form-label">Заалны нэр</label>
-			    <input type="text" class="form-control" name="zaal_name"  placeholder="Заалны нэр" id="zaal_name_in">
-			  </div>
-			  <div class="col-4">
-			    <label for="inputEmail4" class="form-label">Хотоо сонгоно уу</label>
-					<select class="form-select" id="city" name="zaal_city">
-					 <option value="null" selected>--Хотоо сонгоно уу--</option>
-					 <?php
-						 $response = mysqli_query($db, "SELECT * FROM city order by city_name");
-						 while ($row = mysqli_fetch_array($response)) {
-					 ?>
-									 <option value="<?php echo $row['city_code']; ?>"><?php echo $row['city_name']; ?></option>
-					 <?php }	?>
-				 </select>
-			  </div>
-			  <div class="col-4">
-			    <label for="inputPassword4" class="form-label">Дүүрэг</label>
-					<select class="form-select" id="district" name="zaal_district">
-						<option value="null" selected>--Дүүрэг--</option>
-					</select>
-			  </div>
-				<div class="col-4">
-			    <label for="inputPassword4" class="form-label">Баг/хороо</label>
-					<select class="form-select" id="khoroo"  name="zaal_khoroo">
-						<option value="null" selected>--Баг/хороо--</option>
-					</select>
-			  </div>
-			  <div class="col-6">
-			    <label for="inputCity" class="form-label">Зураг</label>
-			    <input type="file" class="form-control" name="zaal_image" id="imageFile_img">
-			  </div>
-			  <div class="col-6">
-			    <label for="inputZip" class="form-label">Youtube video id</label>
-			    <input type="text" class="form-control" name="zaal_video" id="imageFile" >
-			  </div>
-			  <div class="col-12">
-			    <button type="submit" class="btn btn-primary ">Оруулах</button>
-			  </div>
-			</form>
-			<div class="row ">
-				<div class="col-3">
+  <section class="py-5  container">
+		<form class="row g-3" action="api/insert.php"  method="post"  enctype="multipart/form-data">
+			<div class="col-12">
+		    <label for="inputAddress" class="form-label">Заалны нэр</label>
+		    <input type="text" class="form-control" name="zaal_name"  placeholder="Заалны нэр" id="zaal_name_in">
+		  </div>
+		  <div class="col-4">
+		    <label for="inputEmail4" class="form-label">Хотоо сонгоно уу</label>
+				<select class="form-select" id="city" name="zaal_city">
+				 <option value="null" selected>--Хотоо сонгоно уу--</option>
+				 <?php
+					 $response = mysqli_query($db, "SELECT * FROM city order by city_name");
+					 while ($row = mysqli_fetch_array($response)) {
+				 ?>
+								 <option value="<?php echo $row['city_code']; ?>"><?php echo $row['city_name']; ?></option>
+				 <?php }	?>
+			 </select>
+		  </div>
+		  <div class="col-4">
+		    <label for="inputPassword4" class="form-label">Дүүрэг</label>
+				<select class="form-select" id="district" name="zaal_district">
+					<option value="null" selected>--Дүүрэг--</option>
+				</select>
+		  </div>
+			<div class="col-4">
+		    <label for="inputPassword4" class="form-label">Баг/хороо</label>
+				<select class="form-select" id="khoroo"  name="zaal_khoroo">
+					<option value="null" selected>--Баг/хороо--</option>
+				</select>
+		  </div>
+		  <div class="col-6">
+		    <label for="inputCity" class="form-label">Зураг</label>
+		    <input type="file" class="form-control" name="zaal_image" id="imageFile_img">
+		  </div>
+		  <div class="col-6">
+		    <label for="inputZip" class="form-label">Youtube video id</label>
+		    <input type="text" class="form-control" name="zaal_video" id="imageFile" >
+		  </div>
+		  <div class="col-12">
+		    <button type="submit" class="btn btn-primary ">Оруулах</button>
+		  </div>
+		</form>
+		<div class="row ">
+			<div class="col-3">
 
-				</div>
-				<div class="col-6">
-					<div class="card shadow-sm">
-						<img src="" alt="" class="bd-placeholder-img card-img-top" width="100%" height="225" id="preview_img">
-						<div class="card-body">
-							<div class="text-center">
-								<p class="card-text" id="zaal_name"></p>
-									<iframe width="420" height="315" class=" mt-4 mb-4 " src="https://www.youtube.com/embed/" id="preview"></iframe>
-							</div>
+			</div>
+			<div class="col-6">
+				<div class="card shadow-sm">
+					<img src="" alt="" class="bd-placeholder-img card-img-top" width="100%" height="225" id="preview_img">
+					<div class="card-body">
+						<div class="text-center">
+							<p class="card-text" id="zaal_name"></p>
+								<iframe width="420" height="315" class=" mt-4 mb-4 " src="https://www.youtube.com/embed/" id="preview"></iframe>
 						</div>
 					</div>
 				</div>
-				<div class="col-3">
+			</div>
+			<div class="col-3">
 
-				</div>
 			</div>
 		</div>
-	  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">...</div>
-	  <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">...</div>
-	</div>
+
 	  </section>
 	</main>
 	</body>

@@ -25,7 +25,7 @@
       $logged_in_user = mysqli_fetch_assoc($results);
 			if ($logged_in_user['user_role'] != 'user') {
 				$_SESSION['user'] = $logged_in_user;
-        $callback='admin/';
+        $callback='admin.php';
 			}else{
 				$_SESSION['user'] = $logged_in_user;
         $callback='index.php';
@@ -66,5 +66,5 @@
     );
      echo json_encode($back);
   }
-  
+
  ?>
