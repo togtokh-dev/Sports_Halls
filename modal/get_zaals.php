@@ -28,6 +28,7 @@ while ($row = mysqli_fetch_array($results)) {
   $count++;
 ?>
  <div class="col">
+   <a href="./zaal.php?id=<?php echo $row['zaal_id']; ?>">
    <div class="card shadow-sm">
      <img src="<?php echo $row['zaal_image']; ?>" alt="" class="bd-placeholder-img card-img-top" width="100%" height="225">
      <div class="card-body">
@@ -39,6 +40,7 @@ while ($row = mysqli_fetch_array($results)) {
        </div>
      </div>
    </div>
+   </a>
  </div>
 <?php } ?>
 <?php if($count==0){ ?>

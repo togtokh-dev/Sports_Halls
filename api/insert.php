@@ -32,7 +32,7 @@
 		$query = "INSERT INTO `zaal` (`zaal_id`, `zaal_name`, `zaal_image`, `zaal_video`, `zaal_user`, `zaal_city`, `zaal_district`, `zaal_khoroo`, `zaal_about`)
     VALUES ('$rand_id', '$zaal_name', '$zaal_image', '$zaal_video', '$user_id', '$zaal_city', '$zaal_district', '$zaal_khoroo', '$zaal_about');";
 		if(mysqli_query($db, $query)){
-			header('location: ../admin.php?id='.$rand_id);
+			header('location: ../edit.php?id='.$rand_id);
 		}else{
 			header('location: ../admin.php');
 		}
