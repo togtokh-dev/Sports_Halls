@@ -151,7 +151,7 @@ CREATE TABLE `zaal` (
 
 LOCK TABLES `zaal` WRITE;
 /*!40000 ALTER TABLE `zaal` DISABLE KEYS */;
-INSERT INTO `zaal` VALUES ('4agocktbrn','Мубис заал','http://localhost/Sports_Halls/uploads/code2.webp','WpqhfVVuQ8s','ABJ61ZOLHU',11,'19','19_11_15-r khoroo','');
+INSERT INTO `zaal` VALUES ('4agocktbrn','Мубис заал','http://localhost/Sports_Halls/uploads/code2.webp','WpqhfVVuQ8s','ABJ61ZOLHU',11,'19','19_11_15-r khoroo',''),('cl41a5o6fh','Мубис заал 2','http://localhost/Sports_Halls/uploads/aTMLLVVZ_400x400.jpg','WpqhfVVuQ8s','ABJ61ZOLHU',64,'19','19_64_3-r bag, Bulgan ',''),('nvdcil3pe1','Мубис заал 2','http://localhost/Sports_Halls/uploads/codecode.webp','WpqhfVVuQ8s','ABJ61ZOLHU',11,'7','7_11_12-r khoroo','');
 /*!40000 ALTER TABLE `zaal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,12 +163,12 @@ DROP TABLE IF EXISTS `zaal_days`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `zaal_days` (
-  `zday_id` int NOT NULL,
+  `zday_id` varchar(55) NOT NULL,
   `zaal_id` varchar(45) DEFAULT NULL,
-  `zday_week` varchar(45) DEFAULT NULL,
+  `zday_day` date DEFAULT NULL,
   `zday_amount` varchar(45) DEFAULT NULL,
-  `zday_hour_start` varchar(45) DEFAULT NULL,
-  `zday_hour_end` varchar(45) DEFAULT NULL,
+  `zday_hour` varchar(45) DEFAULT NULL,
+  `zday_created_date` date DEFAULT NULL,
   `zday_type` varchar(45) DEFAULT NULL,
   `zday_user` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`zday_id`)
@@ -181,6 +181,7 @@ CREATE TABLE `zaal_days` (
 
 LOCK TABLES `zaal_days` WRITE;
 /*!40000 ALTER TABLE `zaal_days` DISABLE KEYS */;
+INSERT INTO `zaal_days` VALUES ('2W8V4GQ17N','4agocktbrn','2000-12-04','123','123','2022-05-17','show','ABJ61ZOLHU'),('A79DUE3PJS','4agocktbrn','2022-05-18','20000','9 оос 10','2022-05-17','show','ABJ61ZOLHU');
 /*!40000 ALTER TABLE `zaal_days` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -193,4 +194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-17 10:27:28
+-- Dump completed on 2022-05-18 12:57:33
