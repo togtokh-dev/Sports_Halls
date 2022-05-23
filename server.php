@@ -40,4 +40,8 @@
     $results = mysqli_query($db, $query);
     return mysqli_fetch_assoc($results);
 	}
+  if(isset($_GET['delete_zaal'])){
+    $delete_zaal=$_GET['delete_zaal'];
+    $results = mysqli_query($db, "DELETE FROM `zaal` WHERE (`zaal_id` = '$delete_zaal')");
+  }
 ?>

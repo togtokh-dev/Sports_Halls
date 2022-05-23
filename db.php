@@ -7,7 +7,7 @@
 		'app_secret'     => '8fbb6ef9709b491f558b2499eb320d20',
 		'default_graph_version'  => 'v8.0'
 	]);
-  $db = mysqli_connect("localhost", "root", "1234", "zaal");
+$db = mysqli_connect("ls-3cafb89f8997e4de71cc96223bc939e463dd3be7.c34z5emfo7ly.ap-northeast-1.rds.amazonaws.com", "basic_user", "1234", "zaal");
   $db->set_charset("utf8");
   $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
   date_default_timezone_set("Asia/Ulaanbaatar");

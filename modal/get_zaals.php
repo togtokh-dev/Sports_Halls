@@ -45,10 +45,6 @@ while ($row = mysqli_fetch_array($results)) {
 <?php } ?>
 <?php if($count==0){ ?>
   <div class="col-12 row">
-      <div class="col-12 mx-auto">
-        <p>
-          <a href="#" class="btn btn-primary my-2">Илэрц алга</a>
-        </p>
-      </div>
+    Илэрц алга
     </div>
 <?php } ?>

@@ -26,7 +26,7 @@
         <div class="col-sm-4 offset-md-1 py-4">
           <h4 class="text-white">Цэс</h4>
           <ul class="list-unstyled">
-            <li><a href="#" class="text-white">Захиалга ууд</a></li>
+              <li><a href="./orders.php" class="text-white">Захиалга ууд</a></li>
 						<?php if(isAdmin()){ ?>
 							<li><a href="./admin.php" class="text-white">Админ</a></li>
 						<?php } ?>

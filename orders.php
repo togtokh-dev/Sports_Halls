@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <?php
 	include('server.php');
-	// if (!isLoggedIn()) {
-	// 	header('location: login.php');
-	// }
+	if (!isLoggedIn()) {
+		header('location: login.php');
+	}
  ?>
  <?php
  if(isset($_GET['id'])){
 	$id=$_GET['id'];
-	$results = mysqli_query($db, "SELECT * FROM zaal where zaal_id='$id' ");
-	$data = mysqli_fetch_assoc( $results);
- }else{
-	header('location: ./index.php');
- }
+	mysqli_query($db, 	"UPDATE `zaal_days` SET `zday_type` = 'not' WHERE (`zday_id` = '$id');");
+	$rand = rand_text(10);
+	mysqli_query($db, 	"INSERT INTO orders (`order_id`, `order_user`, `order_date`, `order_zaal_id`, `orderscol`) VALUES ('$rand', '$user_id', '$time', '$id', '');");
+	header('location: ./orders.php');
+}
  ?>
 <html lang="en" dir="ltr">
   <head>
@@ -21,6 +21,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="style.css">
+		<style media="screen">
+		</style>
   </head>
 	<body>
 	<header>
@@ -35,7 +37,7 @@
         <div class="col-sm-4 offset-md-1 py-4">
           <h4 class="text-white">Цэс</h4>
           <ul class="list-unstyled">
-            <li><a href="#" class="text-white">Захиалга ууд</a></li>
+            <li><a href="./orders.php" class="text-white">Захиалга ууд</a></li>
 						<?php if(isAdmin()){ ?>
 							<li><a href="./admin.php" class="text-white">Админ</a></li>
 						<?php } ?>
@@ -74,40 +76,38 @@
 	</header>
 	<main>
   <section class="py-5 text-center container">
-		<h1><?php echo $data['zaal_name']; ?></h1>
-		<img src="<?php echo $data['zaal_image']; ?>" class="img-fluid rounded" alt="...">
-		<br>
-		<p class="h2"><?php echo (zaal_location($data['zaal_khoroo'])['city_name']); ?> / <?php echo (zaal_location($data['zaal_khoroo'])['district_name']); ?> / <?php echo (zaal_location($data['zaal_khoroo'])['khoroo_name']); ?></p>
-		<br>
+		<h1>Захиалга</h1>
 		<div class="container col-11">
 			<table class="table table-bordered border-primary">
-			  <thead>
-			    <tr>
-			      <th scope="col">#</th>
-			      <th scope="col">Өдөр</th>
-			      <th scope="col">Цаг</th>
-			      <th scope="col">Үнэ</th>
-						<th scope="col"></th>
-			    </tr>
-			  </thead>
-			  <tbody>
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Өдөр</th>
+						<th scope="col">Цаг</th>
+						<th scope="col">Хана</th>
+						<th scope="col">Төлсөн</th>
+					</tr>
+				</thead>
+				<tbody>
 					<?php
-						$response = mysqli_query($db, "SELECT * FROM  zaal_days where zaal_id='$id' ");
+						$response = mysqli_query($db, "SELECT * FROM zaal.orders
+JOIN zaal_days ON zaal_days.zday_id = orders.order_zaal_id
+JOIN zaal ON zaal_days.zaal_id = zaal.zaal_id
+where orders.order_user = '$user_id'");
 						while ($row = mysqli_fetch_array($response)) {
 					?>
-			    <tr>
-			      <th scope="row"><?php echo $row['zday_id']; ?></th>
-			      <td><?php echo $row['zday_day']; ?></td>
-			      <td><?php echo $row['zday_hour']; ?></td>
-			      <td><?php echo $row['zday_amount']; ?></td>
-						<td> <a href="ordering.php?id=<?php echo $row['zday_id'];  ?>">Захиалах</a> </td>
-			    </tr>
+					<tr>
+						<th scope="row"><?php echo $row['zday_id']; ?></th>
+						<td><?php echo $row['zday_day']; ?></td>
+						<td><?php echo $row['zday_hour']; ?></td>
+						<td><?php echo (zaal_location($row['zaal_khoroo'])['city_name']); ?> / <?php echo (zaal_location($row['zaal_khoroo'])['district_name']); ?> / <?php echo (zaal_location($row['zaal_khoroo'])['khoroo_name']); ?></td>
+						<td><?php echo $row['order_date']; ?></td>
+					</tr>
 					<?php }	?>
-			  </tbody>
+				</tbody>
 			</table>
 		</div>
-		 <iframe width="1080" height="780" class=" mt-4 mb-4 " src="https://www.youtube.com/embed/<?php print_r($data['zaal_video']); ?>"></iframe>
-	</section>
+  </section>
 	</main>
 	</body>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>

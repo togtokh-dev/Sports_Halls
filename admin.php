@@ -101,7 +101,7 @@
       <td><?php echo (zaal_location($row['zaal_khoroo'])['city_name']); ?> / <?php echo (zaal_location($row['zaal_khoroo'])['district_name']); ?> / <?php echo (zaal_location($row['zaal_khoroo'])['khoroo_name']); ?></td>
       <td class="text-center">
 				<a href="./edit.php?id=<?php echo $row['zaal_id']; ?>"><img src="https://img.icons8.com/nolan/64/edit--v1.png" width="30"/></a>
-				<a href="#"><img src="https://img.icons8.com/dusk/64/000000/filled-trash.png" width="30"/></a>
+				<a href="?delete_zaal=<?php echo $row['zaal_id']; ?>"><img src="https://img.icons8.com/dusk/64/000000/filled-trash.png" width="30"/></a>
 			</td>
     </tr>
 		<?php }	?>
@@ -170,7 +170,35 @@
 				</div>
 			</div>
 		</div>
-	  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">...</div>
+	  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+			<table class="table table-bordered border-primary">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Өдөр</th>
+						<th scope="col">Цаг</th>
+						<th scope="col">Хана</th>
+						<th scope="col">Төлсөн</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+						$response = mysqli_query($db, "SELECT * FROM zaal.orders
+			JOIN zaal_days ON zaal_days.zday_id = orders.order_zaal_id
+			JOIN zaal ON zaal_days.zaal_id = zaal.zaal_id ");
+						while ($row = mysqli_fetch_array($response)) {
+					?>
+					<tr>
+						<th scope="row"><?php echo $row['zday_id']; ?></th>
+						<td><?php echo $row['zday_day']; ?></td>
+						<td><?php echo $row['zday_hour']; ?></td>
+						<td><?php echo (zaal_location($row['zaal_khoroo'])['city_name']); ?> / <?php echo (zaal_location($row['zaal_khoroo'])['district_name']); ?> / <?php echo (zaal_location($row['zaal_khoroo'])['khoroo_name']); ?></td>
+						<td><?php echo $row['order_date']; ?></td>
+					</tr>
+					<?php }	?>
+				</tbody>
+			</table>
+		</div>
 	  <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">...</div>
 	</div>
 	  </section>
