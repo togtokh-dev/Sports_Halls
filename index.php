@@ -13,7 +13,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="style.css">
   </head>
-	<body>
+	<body style="background-image: url('https://www.buzznews.mn/upload/images/thumb/buzzpgimg_620d92e6cedb1.jpg'); background-repeat: no-repeat; background-size: 100%; ">
 	<header>
   <div class="collapse bg-dark" id="navbarHeader">
     <div class="container">
@@ -64,9 +64,9 @@
   </div>
 	</header>
 	<main>
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
+  <section class="py-5 text-center container " >
+    <div class="row py-lg-5 ">
+      <div class="col-lg-6 col-md-8 mx-auto card p-5 ">
         <!-- <h1 class="fw-light"></h1>
         <p class="lead text-muted"></p> -->
 				<div class="row g-3">
@@ -100,7 +100,7 @@
       </div>
     </div>
   </section>
-  <div class="album py-5 bg-light">
+  <div class="album py-5 " >
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="zaals">
      </div>

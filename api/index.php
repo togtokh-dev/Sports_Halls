@@ -9,7 +9,7 @@
     login($_POST['email'],$_POST['password']);
   }
   if(isset($_GET['register'])){
-    register($_POST['email'],$_POST['username'],$_POST['password']);
+    register($_POST['email'],$_POST['username'],$_POST['password'],$_POST['phone']);
   }
   function login($email_in,$password_in){
     global $db;
@@ -40,7 +40,7 @@
     );
      echo json_encode($back);
   }
-  function register($email_in,$username_in,$password_in){
+  function register($email_in,$username_in,$password_in,$phone){
     global $db,$time;
     $email = strtolower(@$email_in);
     $username = @$username_in;
@@ -53,7 +53,7 @@
 		if (@mysqli_num_rows(@$results) != 1){
       $success= true;
       $id=rand_text(10);
-      $query_q = "INSERT INTO users (user_id,user_name, user_email, user_role, user_password,user_created_date) VALUES('$id','$username', '$email', 'user', '$password','$time')";
+      $query_q = "INSERT INTO users (user_id,user_name, user_email, user_role, user_password,user_created_date,user_phone) VALUES('$id','$username', '$email', 'user', '$password','$time','$phone')";
       mysqli_query($db, $query_q);
       $callback='login.php';
     }else {

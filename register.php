@@ -45,6 +45,10 @@
 							<input type="email" id="email" name="email"  class="form-control"placeholder="your_email@gmail.com" >
 						</div>
 						<div class="mb-3">
+							<label class="form-label">Холбоо барих дугаар</label>
+							<input type="number" id="phone" name="phone"  class="form-control"placeholder="9911****" >
+						</div>
+						<div class="mb-3">
 							<label class="form-label">Нууц үг</label>
 							<input type="password" id="password" name="password"  class="form-control" placeholder="Ab12345678">
 							<div class="" id="cheke_console" style=" display: none;">
